@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using GestionClinique.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace GestionClinique.Controllers
 {
@@ -20,7 +21,16 @@ namespace GestionClinique.Controllers
 
         public IActionResult Index()
         {
-            return View();
+
+            if (HttpContext.Session.GetInt32("user_id")==null)
+            {
+                return View("~/Views/Login.cshtml");
+            }
+            else
+            {
+                return View("~/Views/Home/index.cshtml");
+            }
+            
         }
 
         public IActionResult Privacy()

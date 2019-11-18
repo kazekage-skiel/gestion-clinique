@@ -1,0 +1,125 @@
+
+@{
+    Layout = null;
+}
+@model User
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GestionClinique</title>
+    <link rel="stylesheet" href="~/css/style.min.css" />
+</head>
+<body>
+<div class="main-wrapper">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Login box.scss -->
+    <!-- ============================================================== -->
+    <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(asset/images/big/auth-bg.jpg) no-repeat center center;">
+        <div class="auth-box">
+            <div id="loginform">
+                <div class="logo">
+                    <span class="db"><img height="70px" width="70px" src="~/asset/images/panohopital.jpg" alt="logo" /></span>
+                    <h5 class="font-medium m-b-20">Se Connecter</h5>
+                </div>
+                <!-- Form -->
+                <div class="row">
+                    <div class="col-12">
+                        <form class="form-horizontal m-t-20" asp-controller="User" id="loginform" asp-action="Login">
+                            <div class="form-group">
+                                @*<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" asp-for="AreaId">
+                                    <option selected="">Selectionnez votre zone de travail</option>
+                                </select>*@
+                              
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="ti-user"></i></span>
+                                </div>
+                                <input type="text" asp-for="Username" class="form-control form-control-lg" placeholder="Nom d'utilisateur" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon2"><i class="ti-pencil"></i></span>
+                                </div>
+                                <input asp-for="Password" class="form-control form-control-lg" placeholder="Mot de passe" aria-label="Password" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <a href="javascript:void(0)" id="to-recover" class="text-dark float-right"><i class="fa fa-lock m-r-5"></i> Mot de passe oublié ?</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group text-center">
+                                <div class="col-xs-12 p-b-20">
+                                    <button class="btn btn-block btn-lg btn-info" type="submit">Se connecter</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="recoverform">
+                <div class="logo">
+                    <span class="db"><img src="assets/images/logo-icon.png" alt="logo" /></span>
+                    <h5 class="font-medium m-b-20">Mot de passe oublié</h5>
+                    <span>Entrer votre email et suivez les informations</span>
+                </div>
+                <div class="row m-t-20">
+                    <!-- Form -->
+                    <form class="col-12" action="https://wrappixel.com/demos/admin-templates/xtreme-admin/html/light-sidebar/index.html">
+                        <!-- email -->
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control form-control-lg" type="email" required="" placeholder="Username">
+                            </div>
+                        </div>
+                        <!-- pwd -->
+                        <div class="row m-t-20">
+                            <div class="col-12">
+                                <button class="btn btn-block btn-lg btn-danger" type="submit" name="action">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*part to the sudo login Admin*@
+    <a href="" class="">Sudo</a>
+</div>
+
+<script src="asset/libs/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="asset/libs/popper.js/dist/umd/popper.min.js"></script>
+<script src="asset/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script>
+      $('[data-toggle="tooltip"]').tooltip();
+          $(".preloader").fadeOut();
+          // ============================================================== 
+          // Login and Recover Password 
+          // ============================================================== 
+          $('#to-recover').on("click", function() {
+              $("#loginform").slideUp();
+              $("#recoverform").fadeIn();
+          });
+          </script>
+</body>
+</html>
