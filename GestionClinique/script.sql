@@ -2,6 +2,8 @@
 
 CREATE database asp_gestion_clinique;
 
+/*script de creation de la base de donnée*/
+
 use asp_gestion_clinique;
 
 
@@ -66,7 +68,7 @@ CREATE TABLE titres
 
 CREATE TABLE users
 (
-    id          integer    NOT NULL PRIMARY KEY,
+    user_id          VARCHAR(45)    NOT NULL PRIMARY KEY,
     lname      VARCHAR(45) NULL,
     fname      VARCHAR(45) NULL,
     date_in    DATETIME    NULL,
@@ -98,7 +100,7 @@ CREATE TABLE consultations
     date_consul        DATETIME NULL,
     maladies_id        INT      NOT NULL,
     PreConsultation_id INT      NOT NULL,
-    user_id             int    NOT NULL,
+    user_id             varchar(45)    NOT NULL,
     CONSTRAINT fk_maladie
         FOREIGN KEY (maladies_id)
             REFERENCES maladies (id),
@@ -107,7 +109,7 @@ CREATE TABLE consultations
             REFERENCES preConsultations (id),
     CONSTRAINT fk_Consultation_user
         FOREIGN KEY (user_id)
-            REFERENCES users (id)
+            REFERENCES users (user_id)
 )
 
 

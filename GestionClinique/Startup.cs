@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NToastNotify;
 
 namespace GestionClinique
 {
@@ -32,11 +33,18 @@ namespace GestionClinique
             services.AddSession(options =>
             {
                 options.Cookie.HttpOnly = true;
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
             });
-            services.AddMvc();
+            
+            services.AddMvc().AddNToastNotifyNoty(new NotyOptions
+            {
+                ProgressBar = true,
+                Timeout = 5000,
+                Theme = "metroui"
+            });;
             services.AddDbContext<DatabaseContext>(builder =>
                 builder.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+            
 
         }
 
@@ -53,6 +61,7 @@ namespace GestionClinique
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseNToastNotify();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -68,8 +77,14 @@ namespace GestionClinique
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "UserLogin",
-                    pattern:"{controller=Auth}/{action=UserLogin}"
+                    pattern:"{controller=User}/{action=Login}"
                 );
+                endpoints.MapControllerRoute(
+                    name: "consultation_create",
+                    pattern: "{controller=Consultation}/{action=CreateForm}"); 
+                endpoints.MapControllerRoute(
+                    name: "consultation_list",
+                    pattern: "{controller=Consultation}/{action=Index}");
             });
             
         }

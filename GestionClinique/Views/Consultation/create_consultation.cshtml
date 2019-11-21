@@ -1,0 +1,184 @@
+@{
+    Layout = "_Layout";
+}
+@model ConsultationModel
+<div class="block-header">
+    <div class="row">
+        <div class="col-lg-7 col-md-6 col-sm-12">
+            <h2>Dashboard</h2>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="index.html">
+                        <i class="zmdi zmdi-home"></i>
+                        Gestion de clinique/Consultation
+                    </a>
+                </li>
+                <li class="breadcrumb-item active">Ajouter une nouvelle consultation</li>
+            </ul>
+            <button class="btn btn-primary btn-icon mobile_menu" type="button">
+                <i class="zmdi zmdi-sort-amount-desc">
+                </i>
+            </button>
+        </div>
+        <div class="col-lg-5 col-md-6 col-sm-12">
+            <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
+                <i class="zmdi zmdi-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row clearfix">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="header">
+                <h2><strong>Consultation</strong> Ajout</h2>
+
+            </div>
+            <div class="body">
+                <p>Formulaire d'ajout de consultation</p>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs p-0 mb-3 nav-tabs-success" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active show" data-toggle="tab" href="#patient_form">
+                            <i class="zmdi zmdi-account"></i> Patient
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#profile_with_icon_title">
+                            <i class="zmdi zmdi-account"></i> Consultation
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#messages_with_icon_title">
+                            <i class="zmdi zmdi-email"></i> Analyse
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " data-toggle="tab" href="#settings_with_icon_title">
+                            <i class="zmdi zmdi-settings"></i> Prescription
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " data-toggle="tab" href="#settings_with_icon_title">
+                            <i class="zmdi zmdi-settings"></i> Resumé
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    @*formulaire d'ajout du patient*@
+                    <div role="tabpanel" class="tab-pane in active show" id="patient_form">
+                        <b>Informations de base</b>
+                        <form action="">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="lname">Nom </label>
+                                        <input type="text" id="lname" placeholder="Nom du patient" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="fname">Prénom </label>
+                                        <input type="text" id="fname" placeholder="Prénom du patient" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="age">Age </label>
+                                        <input type="text" id="age" placeholder="Age du patient" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="genre">Genre </label>
+                                        <input type="text" id="genre" placeholder="Genre du patient" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="age">Taille </label>
+                                        <input type="text" id="age" placeholder="Age du patient" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="genre">Poids </label>
+                                        <input type="text" id="genre" placeholder="Genre du patient" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                     <label for="">Date de naissance </label>
+                                    <input type="date" class="form-control">
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="dropify-wrapper">
+
+                                        <div class="dropify-message"><span class="file-icon"></span>
+                                            <p>Glisser deposer ou cliquer ici</p>
+                                            <p class="dropify-error">Ooops, Erreur detecté</p>
+                                        </div>
+                                        <div class="dropify-loader" style="display: none;"></div>
+                                        <div class="dropify-errors-container">
+                                            <ul></ul>
+                                        </div>
+                                        <input type="file" class="dropify">
+                                        <button type="button" class="dropify-clear">Effacer</button>
+                                        <div class="dropify-preview" style="display: none;">
+                                            <span class="dropify-render"></span>
+                                            <div class="dropify-infos">
+                                                <div class="dropify-infos-inner">
+                                                    <p class="dropify-filename">
+                                                        <span class="file-icon"></span>
+                                                        <span class="dropify-filename-inner">background_06.0402e15a.jpg</span>
+                                                    </p>
+                                                    <p class="dropify-infos-message">Glisser Deposer</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-raised btn-primary btn-round waves-effect" value="Enregistrer">
+                        </form>
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="profile_with_icon_title">
+                        <b>Profile Content</b>
+                        <p>
+                            Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
+                            Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
+                            pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
+                            sadipscing mel.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="messages_with_icon_title">
+                        <b>Message Content</b>
+                        <p>
+                            Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
+                            Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
+                            pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
+                            sadipscing mel.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane " id="settings_with_icon_title">
+                        <b>Settings Content</b>
+                        <p>
+                            Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
+                            Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
+                            pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
+                            sadipscing mel.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

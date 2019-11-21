@@ -11,5 +11,6 @@ namespace GestionClinique.Models
         }
         public DbSet<User> Users { get; set; }
         public DbSet<sudo> sudo { get; set; }
+        public DbSet<Zone> Zones { get; set; }
     }
 }

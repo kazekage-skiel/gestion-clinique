@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,7 +8,7 @@ namespace GestionClinique.Models
     public class User
     {
         [Key]
-        public int Id { get; set; }
+        public string User_Id { get; set; }
         public string Fname { get; set; }
         
         public string Lname { get; set; }

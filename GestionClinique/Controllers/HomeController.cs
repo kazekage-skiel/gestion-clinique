@@ -13,24 +13,30 @@ namespace GestionClinique.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private DatabaseContext _databaseContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,DatabaseContext databaseContext)
         {
             _logger = logger;
+            _databaseContext = databaseContext;
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
-
-            if (HttpContext.Session.GetInt32("user_id")==null)
-            {
-                return View("~/Views/Login.cshtml");
-            }
-            else
-            {
-                return View("~/Views/Home/index.cshtml");
-            }
             
+            if (HttpContext.Request.Method=="GET")
+            {
+                // The action is a POST.
+                var zones = this._databaseContext.Zones.ToList();
+                ViewBag.zonesBag = zones;
+          
+                if (HttpContext.Session.GetString("user_id")==null)
+                {
+                    return View("~/Views/Login.cshtml");
+                }
+            }
+
+            return View("Index");
         }
 
         public IActionResult Privacy()
