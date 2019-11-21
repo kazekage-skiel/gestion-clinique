@@ -70,18 +70,19 @@
                     @*formulaire d'ajout du patient*@
                     <div role="tabpanel" class="tab-pane in active show" id="patient_form">
                         <b>Informations de base</b>
-                        <form action="">
+                        @*ajout du patient*@
+                        <form  method="post" enctype="multipart/form-data" >
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="lname">Nom </label>
-                                        <input type="text" id="lname" placeholder="Nom du patient" class="form-control"/>
+                                        <input type="text" id="lname" placeholder="Nom du patient" name="lname" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="fname">Prénom </label>
-                                        <input type="text" id="fname" placeholder="Prénom du patient" class="form-control"/>
+                                        <input type="text" id="fname" placeholder="Prénom du patient" name="fname" class="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -89,64 +90,44 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="age">Age </label>
-                                        <input type="text" id="age" placeholder="Age du patient" class="form-control"/>
+                                        <input type="number" id="age"  placeholder="Age du patient"  name="age" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
+                                    <label for="age">Genre</label>
                                     <div class="form-group">
-                                        <label for="genre">Genre </label>
-                                        <input type="text" id="genre" placeholder="Genre du patient" class="form-control"/>
+                                        <select class="selectpicker" id="gender" name="gender">
+                                            <option value="0" selected>"Selectionner le genre</option>
+                                            <option value="1">Homme</option>
+                                            <option value="2">Femme</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="age">Taille </label>
-                                        <input type="text" id="age" placeholder="Age du patient" class="form-control"/>
+                                        <label for="taille">Taille </label>
+                                        <input type="number" id="taille" name="taille" placeholder="Taille du patient" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="genre">Poids </label>
-                                        <input type="text" id="genre" placeholder="Genre du patient" class="form-control"/>
+                                        <label for="poids">Poids </label>
+                                        <input type="number" id="poids" placeholder="Poid du patient" name="poids" class="form-control"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                     <label for="">Date de naissance </label>
-                                    <input type="date" class="form-control">
+                                    <label for="">Date de naissance </label>
+                                    <input type="date" id="birthdate" class="form-control" name="date">
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="dropify-wrapper">
-
-                                        <div class="dropify-message"><span class="file-icon"></span>
-                                            <p>Glisser deposer ou cliquer ici</p>
-                                            <p class="dropify-error">Ooops, Erreur detecté</p>
-                                        </div>
-                                        <div class="dropify-loader" style="display: none;"></div>
-                                        <div class="dropify-errors-container">
-                                            <ul></ul>
-                                        </div>
-                                        <input type="file" class="dropify">
-                                        <button type="button" class="dropify-clear">Effacer</button>
-                                        <div class="dropify-preview" style="display: none;">
-                                            <span class="dropify-render"></span>
-                                            <div class="dropify-infos">
-                                                <div class="dropify-infos-inner">
-                                                    <p class="dropify-filename">
-                                                        <span class="file-icon"></span>
-                                                        <span class="dropify-filename-inner">background_06.0402e15a.jpg</span>
-                                                    </p>
-                                                    <p class="dropify-infos-message">Glisser Deposer</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <input type="file" id="pp_file" name="pp_file"/>
                                     </div>
-                                </div>
                             </div>
-                            <input type="submit" class="btn btn-raised btn-primary btn-round waves-effect" value="Enregistrer">
+                            <input type="submit" id="saveDoctor" class="btn btn-raised btn-primary btn-round waves-effect" value="Enregistrer">
                         </form>
 
                     </div>
@@ -182,3 +163,39 @@
         </div>
     </div>
 </div>
+@section Scripts
+{
+    <script>
+       $(document).ready(function() {
+            let saveBtn=$("#saveDoctor")
+            var file;
+            $("#pp_file").change(function(e) {
+                                file=e.target.files[0]
+                              });
+            saveBtn.click(function() {
+             
+                  var lname=$("#lname").val()
+                  var fname=$("#fname").val();
+                  var age=$("#age").val();
+                  var genre=$("#gender").val();
+                  var taille=$("#taille").val();
+                  var poids=$("#poids").val();
+                  var birthdate=$("#birthdate").val();
+        
+                let formdata=new FormData
+                formdata.append("lname",lname)
+                formdata.append("fname",fname)
+                formdata.append("age",age)
+                formdata.append("genre",genre)
+                formdata.append("taille",taille)
+                formdata.append("poids",poids)
+                formdata.append("birthday",birthdate)
+                formdata.append("user_pp",file)
+                
+                axios.post('/Consultation/AddPatient',formdata)
+                
+                
+            })
+       })
+    </script>
+}

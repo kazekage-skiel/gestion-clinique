@@ -5,14 +5,13 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - GestionClinique</title>
-   
     <link rel="stylesheet" href="~/assets/plugins/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/assets/css/style.min.css"/>
+      <link rel="stylesheet" href="~/assets/css/style.min.css"/>
     <link rel="stylesheet" href="~/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css"/>
     <link rel="stylesheet" href="~/assets/plugins/charts-c3/plugin.css"/>
     
     <link rel="stylesheet" href="~/assets/plugins/morrisjs/morris.min.css" />
-    <link rel="stylesheet" href="~/assets/plugins/dropify/css/dropify.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css" />
 </head>
 <body class="theme-blush">
 <div class="page-loader-wrapper" style="display: none;">
@@ -37,7 +36,9 @@
 <script src="~/assets/bundles/jvectormap.bundle.js"></script> <!-- JVectorMap Plugin Js -->
 <script src="~/assets/bundles/sparkline.bundle.js"></script> <!-- Sparkline Plugin Js -->
 <script src="~/assets/bundles/c3.bundle.js"></script>
-<script src="~/assets/plugins/dropify/js/dropify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+
 
 <script src="~/js/site.js" asp-append-version="true"></script>
 @RenderSection("Scripts", required: false)

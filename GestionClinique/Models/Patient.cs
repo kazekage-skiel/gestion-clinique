@@ -1,5 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace GestionClinique.Models
 {
@@ -18,5 +20,8 @@ namespace GestionClinique.Models
         public DateTime birthdate { get; set; }
         public string pp_url { get; set; }
         public int hospitalise { get; set; }
+        
+        [NotMapped]
+        public IFormFile ppFile { get; set; }
     }
 }

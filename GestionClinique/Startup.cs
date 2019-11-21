@@ -78,6 +78,10 @@ namespace GestionClinique
                 endpoints.MapControllerRoute(
                     name: "UserLogin",
                     pattern:"{controller=User}/{action=Login}"
+                ); 
+                endpoints.MapControllerRoute(
+                    name: "AddPatients",
+                    pattern:"{controller=Consultation}/{action=AddPatient}"
                 );
                 endpoints.MapControllerRoute(
                     name: "consultation_create",
