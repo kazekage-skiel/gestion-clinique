@@ -31,40 +31,35 @@ namespace GestionClinique.Controllers
         
         
         [HttpPost]
-        public ActionResult AddPatient(string fname,string lname,int age,int genre,int taille,int poids,DateTime birthday)
+        public void AddPatient(Patient patient)
         {
             /*upload */
             var file = Request.Form.Files;
-            var fileName=ContentDispositionHeaderValue
-                .Parse(file[0].ContentDisposition)
-                .FileName
-                .Trim();
+           
             Console.WriteLine("**********");
-                Console.WriteLine("fname"+fname);
-                Console.WriteLine("lname"+lname);
-                Console.WriteLine("age"+age);
-                Console.WriteLine("genre"+genre);
-                Console.WriteLine("taille"+taille);
-                Console.WriteLine("Poids"+poids);
-                Console.WriteLine("Birthdate"+birthday);
-                Console.WriteLine("pp"+fileName);
+                Console.WriteLine("fname"+patient.fname);
+              
+               
             Console.WriteLine("**********");
            
 
             /*var patient=new Patient
             {
-                age = consultationModel.Patient.age,
-                birthdate = consultationModel.Patient.birthdate,
-                fname = consultationModel.Patient.fname,
-                lname = consultationModel.Patient.lname,
-                genre = consultationModel.Patient.genre,
-                poids = consultationModel.Patient.poids
+                age = age,
+                birthdate = birthday,
+                fname = fname,
+                lname = lname,
+                genre = genre,
+                poids = poids
 
             };
             this._databaseContext.Patients.Add(patient);*/
-            return Ok();
+         
         }
         
+        /*
+         * fontion d'ajout de consultation
+         */
        
         public void InitConsultation()
         {

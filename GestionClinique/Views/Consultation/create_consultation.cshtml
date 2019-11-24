@@ -1,6 +1,7 @@
 @{
     Layout = "_Layout";
 }
+@using Microsoft.CodeAnalysis.CSharp.Syntax
 @model ConsultationModel
 <div class="block-header">
     <div class="row">
@@ -71,64 +72,72 @@
                     <div role="tabpanel" class="tab-pane in active show" id="patient_form">
                         <b>Informations de base</b>
                         @*ajout du patient*@
-                        <form  method="post" enctype="multipart/form-data" >
+                        @using (Html.BeginForm("AddPatient", "Consultation", FormMethod.Post))
+                        {
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="lname">Nom </label>
-                                        <input type="text" id="lname" placeholder="Nom du patient" name="lname" class="form-control"/>
+                                        @Html.TextBoxFor(model => model.Patient.lname,null,new {@class="form-control"})
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="fname">Prénom </label>
-                                        <input type="text" id="fname" placeholder="Prénom du patient" name="fname" class="form-control"/>
+                                        <label for="lname">Prenom </label>
+                                        @Html.TextBoxFor(model => model.Patient.fname,null,new {@class="form-control"})
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="age">Age </label>
-                                        <input type="number" id="age"  placeholder="Age du patient"  name="age" class="form-control"/>
+                                        <label for="lname">Age </label>
+                                        @Html.TextBoxFor(model => model.Patient.age,null,new {@class="form-control"})
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="age">Genre</label>
                                     <div class="form-group">
-                                        <select class="selectpicker" id="gender" name="gender">
-                                            <option value="0" selected>"Selectionner le genre</option>
-                                            <option value="1">Homme</option>
-                                            <option value="2">Femme</option>
-                                        </select>
+                                        <label for="lname">Poids </label>
+                                        @Html.TextBoxFor(model => model.Patient.fname,null,new {@class="form-control"})
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="taille">Taille </label>
-                                        <input type="number" id="taille" name="taille" placeholder="Taille du patient" class="form-control"/>
+                                        <label for="lname">Taille </label>
+                                        @Html.TextBoxFor(model => model.Patient.taille,null,new {@class="form-control"})
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="poids">Poids </label>
-                                        <input type="number" id="poids" placeholder="Poid du patient" name="poids" class="form-control"/>
+                                        <label for="lname">Genre </label>
+                                        @Html.DropDownListFor(model => model.Patient.genre, new List<SelectListItem>
+                                        {
+                                            new SelectListItem {Text = "Masculin",Value = "1"},
+                                            new SelectListItem {Text = "Feminin",Value = "2"}
+                                        },"Selectionnez le genre de l'utilisateur")
+                       
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="">Date de naissance </label>
-                                    <input type="date" id="birthdate" class="form-control" name="date">
+                                    <div class="form-group">
+                                        <label for="lname">Date de naissance </label>
+                                        @Html.TextBoxFor(model=>model.Patient.taille,null,new {@class="form-control"})
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
-                                        <input type="file" id="pp_file" name="pp_file"/>
+                                    <div class="form-group">
+                                        <label for="lname">Genre </label>
+                                        @Html.TextBoxFor(model=>model.Patient.genre,null,new {@class="form-control"})
                                     </div>
+                                </div>
                             </div>
-                            <input type="submit" id="saveDoctor" class="btn btn-raised btn-primary btn-round waves-effect" value="Enregistrer">
-                        </form>
+                            <input type="submit" class="btn btn-round btn-default" value="Sauvegar"/>
+                        }
+                       
 
                     </div>
                     <div role="tabpanel" class="tab-pane" id="profile_with_icon_title">
@@ -192,8 +201,8 @@
                 formdata.append("birthday",birthdate)
                 formdata.append("user_pp",file)
                 
-                axios.post('/Consultation/AddPatient',formdata)
-                
+               /* axios.post('/Consultation/AddPatient',formdata)
+                */
                 
             })
        })
