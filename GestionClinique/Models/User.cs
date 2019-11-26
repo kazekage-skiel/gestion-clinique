@@ -14,10 +14,10 @@ namespace GestionClinique.Models
         public string Lname { get; set; }
         
         [Column("date_in")]
-        public string DateIn { get; set; }
+        public DateTime DateIn { get; set; }
         
         [Column("date_out")]
-        public string DateOut { get; set; }
+        public DateTime DateOut { get; set; }
         
         public string Username { get; set; }
         public string Password { get; set; }
