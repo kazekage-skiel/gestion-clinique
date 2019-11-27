@@ -23,5 +23,23 @@ namespace GestionClinique.Models
         
         [NotMapped]
         public IFormFile ppFile { get; set; }
+
+
+        public Patient()
+        {
+        }
+
+        public Patient(int id, string fname, string lname, int age, int genre, int taille, int poids, DateTime birthdate, string ppUrl)
+        {
+            this.id = id;
+            this.fname = fname;
+            this.lname = lname;
+            this.age = age;
+            this.genre = genre;
+            this.taille = taille;
+            this.poids = poids;
+            this.birthdate = birthdate;
+            pp_url = ppUrl;
+        }
     }
 }

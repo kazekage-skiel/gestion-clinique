@@ -27,9 +27,9 @@ namespace GestionClinique
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-          
-            services.AddDistributedMemoryCache();
             services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
+          
             services.AddSession(options =>
             {
                 options.Cookie.HttpOnly = true;
@@ -44,7 +44,9 @@ namespace GestionClinique
             });;
             services.AddDbContext<DatabaseContext>(builder =>
                 builder.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-            
+
+            services.AddScoped<PatientRepository>();
+            services.AddMvc();
 
         }
 
@@ -88,7 +90,10 @@ namespace GestionClinique
                     pattern: "{controller=Consultation}/{action=CreateForm}"); 
                 endpoints.MapControllerRoute(
                     name: "consultation_list",
-                    pattern: "{controller=Consultation}/{action=Index}");
+                    pattern: "{controller=Consultation}/{action=Index}");  
+                endpoints.MapControllerRoute(
+                    name: "single_consultation",
+                    pattern: "{controller=Consultation}/{action=ShowConsultationPage}/{id?}");
             });
             
         }
