@@ -31,6 +31,13 @@ namespace GestionClinique.Controllers
                 .FirstOrDefault();
             return patient;
         }
+
+        public ActionResult PatientList()
+        {
+            var _patientList = this._databaseContext.Patients.ToList();
+            ViewBag.patientList = _patientList;
+            return View("index");
+        }
        
     }
 }

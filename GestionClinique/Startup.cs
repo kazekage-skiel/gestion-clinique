@@ -94,6 +94,12 @@ namespace GestionClinique
                 endpoints.MapControllerRoute(
                     name: "single_consultation",
                     pattern: "{controller=Consultation}/{action=ShowConsultationPage}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "consultation_list",
+                    pattern: "{controller=Consultation}/{action=ConsultationList}"); 
+                endpoints.MapControllerRoute(
+                    name: "patient_list",
+                    pattern: "{controller=Patient}/{action=PatientList}");
             });
             
         }

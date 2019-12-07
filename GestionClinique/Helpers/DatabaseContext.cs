@@ -14,6 +14,7 @@ namespace GestionClinique.Models
         public DbSet<Zone> Zones { get; set; }
         
         public DbSet<Patient> Patients { get; set; }
-        
+        public DbSet<Consultation> Consultations { get; set; }
+
     }
 }

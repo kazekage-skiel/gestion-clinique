@@ -35,29 +35,29 @@
                 <h2><strong>Consultation</strong> Ajout</h2>
             </div>
             <div class="body">
-                 <p>Pour tout ajout de consultation veuillez d'abord entrer les informations du patient 
+                 <p>Pour tout ajout de consultation veuillez d'abord entrer les informations du _Patient 
                      et vous serez ensuite rediriger vers une page où vous pouvez continuer la suite du processus</p>
                 <!-- Nav tabs -->
               
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    @*formulaire d'ajout du patient*@
-                    <div role="tabpanel" class="tab-pane in active show" id="patient_form">
+                    @*formulaire d'ajout du _Patient*@
+                    <div role="tabpanel" class="tab-pane in active show" id="_Patient_form">
                         <b>Informations de base</b>
-                        @*ajout du patient*@
+                        @*ajout du _Patient*@
 
                         <form method="post" asp-action="AddPatient" asp-controller="Consultation">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="lname">Nom </label>
-                                        <input type="text" asp-for="Patient.lname" class="form-control" id="lname"/>
+                                        <input type="text" asp-for="_Patient.lname" class="form-control" id="lname"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="lname">Prenom </label>
-                                        <input type="text"asp-for="Patient.fname" class="form-control" id="fname"/>
+                                        <input type="text"asp-for="_Patient.fname" class="form-control" id="fname"/>
                                     </div>
                                 </div>
                             </div>
@@ -65,13 +65,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="lname">Age </label>
-                                        <input type="number" asp-for="Patient.age" class="form-control" id="age"/>
+                                        <input type="number" asp-for="_Patient.age" class="form-control" id="age"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="lname">Poids </label>
-                                        <input type="number" asp-for="Patient.poids" class="form-control" id="poids"/>
+                                        <input type="number" asp-for="_Patient.poids" class="form-control" id="poids"/>
                                     </div>
                                 </div>
                             </div>
@@ -79,13 +79,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="lname">Taille </label>
-                                        <input type="number" asp-for="Patient.taille" class="form-control" id="taille"/>
+                                        <input type="number" asp-for="_Patient.taille" class="form-control" id="taille"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="lname">Genre </label>
-                                        <select class="custom-control" id="gender" asp-for="Patient.genre">
+                                        <select class="custom-control" id="gender" asp-for="_Patient.genre">
                                             <option value="0">Veuillez selectionner le genre</option>
                                             <option value="1">Masculin</option>
                                             <option value="2">Feminin</option>
@@ -97,7 +97,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="lname">Date de naissance </label>
-                                        <input type="date" class="form-control" asp-for="Patient.birthdate"/>
+                                        <input type="date" class="form-control" asp-for="_Patient.birthdate"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="submit" class="btn btn-primary btn-round" id="savePatient" value="Ajouter le patient"/>
+                            <input type="submit" class="btn btn-primary btn-round" id="save_Patient" value="Ajouter le _Patient"/>
                         </form>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="profile_with_icon_title">
@@ -147,7 +147,7 @@
 {
     <script>
        $(document).ready(function() {
-            let saveBtn=$("#savePatient")
+            let saveBtn=$("#save_Patient")
             var file;
             $("#pp_file").change(function(e) {
                                 file=e.target.files[0]
@@ -175,7 +175,7 @@
                 alert(genre);
                 e.preventDefault()
                 
-              /* axios.post('/Consultation/AddPatient',formdata).then(success=>{
+              /* axios.post('/Consultation/Add_Patient',formdata).then(success=>{
                  alert("dsd")
                })*/
                 

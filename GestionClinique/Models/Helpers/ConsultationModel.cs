@@ -2,6 +2,8 @@ namespace GestionClinique.Models
 {
     public class ConsultationModel
     {
-        public Patient Patient{ get; set; }
+        public Patient _Patient{ get; set; }
+        
+        public PreConsultation _PreConsultation { get; set; }
     }
 }

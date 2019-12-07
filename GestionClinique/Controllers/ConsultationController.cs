@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GestionClinique.Models;
@@ -88,7 +89,13 @@ namespace GestionClinique.Controllers
                 .FirstOrDefault(_patient => _patient.id == patient_id);
             return patient;
         }
-        
+
+
+        public ActionResult ConsultationList()
+        {
+            var List = this._databaseContext.Consultations.ToList();
+            return View("Index");
+        }
         public void InitConsultation()
         {
             
