@@ -7,6 +7,7 @@ using GestionClinique.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,17 +37,20 @@ namespace GestionClinique
                 options.IdleTimeout = TimeSpan.FromMinutes(60);
             });
             
+            
             services.AddMvc().AddNToastNotifyNoty(new NotyOptions
             {
                 ProgressBar = true,
                 Timeout = 5000,
                 Theme = "metroui"
             });;
+            
             services.AddDbContext<DatabaseContext>(builder =>
                 builder.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
             services.AddScoped<PatientRepository>();
             services.AddMvc();
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build";});
 
         }
 
@@ -63,6 +67,8 @@ namespace GestionClinique
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+       
+            app.UseSpaStaticFiles();
             app.UseNToastNotify();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -74,7 +80,7 @@ namespace GestionClinique
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
+                /*endpoints.MapControllerRoute(
                     name: "Home",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
@@ -99,7 +105,20 @@ namespace GestionClinique
                     pattern: "{controller=Consultation}/{action=ConsultationList}"); 
                 endpoints.MapControllerRoute(
                     name: "patient_list",
-                    pattern: "{controller=Patient}/{action=PatientList}");
+                    pattern: "{controller=Patient}/{action=PatientList}");*/
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action=Index}/{id?}");
+            });
+            
+           
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "clientapp";
+                if (env.IsDevelopment())
+                {
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
             });
             
         }

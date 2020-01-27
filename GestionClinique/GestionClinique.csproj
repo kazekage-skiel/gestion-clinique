@@ -6,6 +6,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0" />
@@ -1231,6 +1232,14 @@
     <_ContentIncludedByDefault Remove="wwwroot\js\pages\ui\sortable-nestable.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\pages\ui\sweetalert.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\pages\widgets\infobox\infobox-1.js" />
+    <_ContentIncludedByDefault Remove="client\public\manifest.json" />
+    <_ContentIncludedByDefault Remove="client\package.json" />
+    <_ContentIncludedByDefault Remove="client\tsconfig.json" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="clientapp\src\components\pages" />
   </ItemGroup>
 
 </Project>
