@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GestionClinique.Models;
 using GestionClinique.Repository;
+using GestionClinique.Repository.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -48,12 +49,15 @@ namespace GestionClinique
             services.AddDbContext<DatabaseContext>(builder =>
                 builder.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<PatientRepository>();
             services.AddMvc();
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build";});
+          
+           
 
         }
-
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -67,7 +71,9 @@ namespace GestionClinique
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
        
+            
             app.UseSpaStaticFiles();
             app.UseNToastNotify();
             app.UseHttpsRedirection();

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,21 +8,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using GestionClinique.Models;
 using GestionClinique.Repository;
+using GestionClinique.Repository.Interface;
+using NToastNotify.Helpers;
 
 namespace GestionClinique.Controllers
 {
-    public class AuthController : Controller
+         [ApiController]
+         [Route("[controller]")]
+    public class AuthController : ControllerBase
     {
-        private UserRepository _userRepository;
+        private IUserRepository _userRepository;
         
-        public AuthController(UserRepository userRepository,DatabaseContext databaseContext)
+        public AuthController(IUserRepository userRepository,DatabaseContext databaseContext)
         {
-            
+            _userRepository = userRepository;
         }
-       
-        public IActionResult UserLogin()
+
+        [HttpGet("workingAreas")]
+        public IEnumerable<Zone> GetWorkingAreas()
         {
-            return View("~/Views/Login.cshtml");
+            return this._userRepository.GetWorkingAreas();
         }
        
     }

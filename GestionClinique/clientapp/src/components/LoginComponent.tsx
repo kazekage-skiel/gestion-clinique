@@ -1,24 +1,28 @@
 import React, {SyntheticEvent} from "react";
 import logo from './../../public/assets/images/logo.svg'
+import axios from "axios";
 
-interface Props {
-
-}
 
 interface State {
     zone_id:number
     username:string
     password:string
+    workingAreas:Array
 }
 
-export default class LoginComponent extends React.Component<Props, State> {
-    constructor(props: Props,state:State) {
-        super(props)
-        this.state=state
+export default class LoginComponent extends React.Component<any, State> {
+    
+    /*
+    definition du state
+    * des objets qui vont s'occuper de se connecter à la base de donnée
+    * 
+    * */
+    state:State={
+        zone_id:0,
+        username:'',
+        password:'',
+        workingAreas:[]
         
-        this.getValue=this.getValue.bind(this)
-        this.handleSubmit=this.handleSubmit.bind(this)
-
     }
     
     getValue=(event:any)=>{
@@ -29,13 +33,35 @@ export default class LoginComponent extends React.Component<Props, State> {
     }
     
     handleSubmit=()=>{
-        console.log(this.state.username)
+        
     }
-  
     
+    async fetchWorkingArea(){
+       let response=await axios.get('/Auth/workingAreas')
+           
+           .then(success=>{
+               this.setState({
+                   workingAreas:success.data
+               })
+           });
+    }
+    
+   
+    
+    componentDidMount(): void {
+        this.fetchWorkingArea();
+       
+    }
 
+
+    /*partie affichage des donnée*/
     render() {
+        const workingAreas=this.state.workingAreas
+        let areas=workingAreas.map(function (item) {
+           
+        })
         return (
+            
            
             <div>
                 <div className="authentication">
@@ -48,6 +74,16 @@ export default class LoginComponent extends React.Component<Props, State> {
                                         <h5>Se connecte</h5>
                                     </div>
                                     <div className="body">
+                                        <div className="input-group mb-3">
+
+                                            <select className="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                                <option defaultValue={0} >Selectionnez votre zone de travail</option>
+                                                {this.state.workingAreas.map(area=>(
+                                                    <option value={area.id}>{area.libele}</option>
+                                                ))}
+                                            </select>
+
+                                        </div>
                                         <div className="input-group mb-3">
                                             <input type="text"   value={this.state.username} onChange={this.getValue} className="form-control" placeholder="Nom d'utilisateur"/>
                                             <div className="input-group-append">
@@ -67,14 +103,7 @@ export default class LoginComponent extends React.Component<Props, State> {
                                         </span>
                                             </div>
                                         </div>
-                                        <div className={"input-group mb-6"}>
-                                            <select >
-                                                <option>loca</option>
-                                                <option>dsds</option>
-                                                <option>dwa</option>
-                                            </select>
-                                        </div>
-
+                                       
                                         <div className="checkbox">
                                             <input id="remember_me" type="checkbox"/>
                                             <label htmlFor="remember_me">Remember Me</label>
