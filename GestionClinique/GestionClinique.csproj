@@ -6,6 +6,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
@@ -1239,7 +1240,8 @@
 
 
   <ItemGroup>
-    <Folder Include="clientapp\src\components\pages" />
+    <Folder Include="clientapp\src\components\pages\services" />
+    <Folder Include="clientapp\src\components\widgets" />
   </ItemGroup>
 
 </Project>

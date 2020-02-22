@@ -6,7 +6,7 @@ namespace GestionClinique.Repository.Interface
 {
     public interface IUserRepository
     {
-        sudo GetUser(sudo userModel);
+        User GetUser(sudo sudo);
         IEnumerable<Zone> GetWorkingAreas();
     }
 }

@@ -29,6 +29,14 @@ namespace GestionClinique.Controllers
         {
             return this._userRepository.GetWorkingAreas();
         }
+
+        [HttpPost("login")]
+        public JsonResult login( [FromBody] sudo sudo)
+        {
+            var response = this._userRepository.GetUser(sudo);
+
+            return new JsonResult(response);
+        }
        
     }
 }

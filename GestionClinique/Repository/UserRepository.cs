@@ -4,6 +4,7 @@
  * une seule instance de la classe qu'importe les appels
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +29,15 @@ namespace GestionClinique.Repository
 
         }
 
-        public sudo GetUser(sudo userModel)
+        public User GetUser(sudo userModel)
         {
-            var user = this._databaseContext.sudo.Where(model => model.Username == userModel.Username)
-                .First(model => model.Password == userModel.Password);
+            var user = this._databaseContext.Users
+                .Where(model => model.Username == userModel.Username)
+                .FirstOrDefault(model => model.Password == userModel.Password);
             return user;
         }
+        
+        
 
         /*function devrant me permetter de recuperrer la liste des
             zonnes de travaisl

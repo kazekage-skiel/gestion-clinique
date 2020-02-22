@@ -13,11 +13,11 @@ namespace GestionClinique.Models
         
         public string Lname { get; set; }
         
-        [Column("date_in")]
-        public DateTime DateIn { get; set; }
+        /*[Column("date_in")]
+        //public DateTime DateIn { get; set; }
         
         [Column("date_out")]
-        public DateTime DateOut { get; set; }
+        public DateTime DateOut { get; set; }*/
         
         public string Username { get; set; }
         public string Password { get; set; }
@@ -30,9 +30,13 @@ namespace GestionClinique.Models
         
         [Column("area_id")]
         public int AreaId { get; set; }
-        
-       
 
 
+        public User(string username, string password, int areaId)
+        {
+            Username = username;
+            Password = password;
+            AreaId = areaId;
+        }
     }
 }

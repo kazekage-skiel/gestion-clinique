@@ -1,13 +1,13 @@
 import React, {SyntheticEvent} from "react";
 import logo from './../../public/assets/images/logo.svg'
 import axios from "axios";
-
+import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
 interface State {
     zone_id:number
     username:string
     password:string
-    workingAreas:Array
+    workingAreas:Array<any>
 }
 
 export default class LoginComponent extends React.Component<any, State> {
@@ -15,7 +15,6 @@ export default class LoginComponent extends React.Component<any, State> {
     /*
     definition du state
     * des objets qui vont s'occuper de se connecter à la base de donnée
-    * 
     * */
     state:State={
         zone_id:0,
@@ -25,20 +24,28 @@ export default class LoginComponent extends React.Component<any, State> {
         
     }
     
-    getValue=(event:any)=>{
-        console.log(event.currentTarget.value)
-       this.setState({
-           username:event.currentTarget.value
-       })
+   
+    
+    handleUsername=(event:any)=>{
+        this.setState({
+            username:event.currentTarget.value
+        }) 
     }
     
-    handleSubmit=()=>{
-        
+    handlePassword=(event:any)=>{
+        this.setState({
+            password:event.currentTarget.value
+        })
     }
     
-    async fetchWorkingArea(){
-       let response=await axios.get('/Auth/workingAreas')
-           
+    handleArea=(event:any)=>{
+        this.setState({
+            zone_id:event.currentTarget.value
+        })
+    }
+    
+    fetchWorkingArea(){
+       let response= axios.get('/Auth/workingAreas')
            .then(success=>{
                this.setState({
                    workingAreas:success.data
@@ -46,23 +53,37 @@ export default class LoginComponent extends React.Component<any, State> {
            });
     }
     
+     handleSubmit=(event:any)=>{
+        
+        axios.post('/Auth/login',{
+            username:this.state.username,
+            password:this.state.password,
+            Area_Id:this.state.zone_id
+        }).then(response=>{
+            if (response.data!=null){
+                this.props.history.push('/login');
+            }else{
+                
+            }
+        })
+            .catch(failure=>{
+                
+            })
+         event.preventDefault()
+    }
+    
+    
+   
+    
    
     
     componentDidMount(): void {
         this.fetchWorkingArea();
-       
     }
-
-
+    
     /*partie affichage des donnée*/
     render() {
-        const workingAreas=this.state.workingAreas
-        let areas=workingAreas.map(function (item) {
-           
-        })
         return (
-            
-           
             <div>
                 <div className="authentication">
                     <div className="container">
@@ -76,16 +97,16 @@ export default class LoginComponent extends React.Component<any, State> {
                                     <div className="body">
                                         <div className="input-group mb-3">
 
-                                            <select className="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                                <option defaultValue={0} >Selectionnez votre zone de travail</option>
-                                                {this.state.workingAreas.map(area=>(
-                                                    <option value={area.id}>{area.libele}</option>
-                                                ))}
+                                            <select className="custom-select mr-sm-2" id="inlineFormCustomSelect" value={this.state.zone_id} onChange={this.handleArea}>
+                                                <option>Selectionnez votre zone de travail</option>
+                                                {this.state.workingAreas.map(area=>{
+                                                    return <option value={area.id} >{area.libele}</option>;
+                                                })}
                                             </select>
 
                                         </div>
                                         <div className="input-group mb-3">
-                                            <input type="text"   value={this.state.username} onChange={this.getValue} className="form-control" placeholder="Nom d'utilisateur"/>
+                                            <input type="text"   value={this.state.username} onChange={this.handleUsername} className="form-control" placeholder="Nom d'utilisateur"/>
                                             <div className="input-group-append">
                                         <span className="input-group-text">
                                             <i className="zmdi zmdi-account-circle"/>
@@ -93,8 +114,8 @@ export default class LoginComponent extends React.Component<any, State> {
                                             </div>
                                         </div>
                                         <div className="input-group mb-3">
-                                            <input type="text" className="form-control" id={"password"}
-                                                   placeholder="Password"/>
+                                            <input type="password" className="form-control" onChange={this.handlePassword}
+                                                   placeholder="Password" />
                                             <div className="input-group-append">
                                         <span className="input-group-text">
                                             <a href="forgot-password.html" className="forgot" title="Forgot Password">

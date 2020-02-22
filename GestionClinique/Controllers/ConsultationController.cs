@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GestionClinique.Models;
 using GestionClinique.Repository;
+using GestionClinique.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,19 +13,23 @@ using NToastNotify;
 
 namespace GestionClinique.Controllers
 {
+    
+    [ApiController]
+    [Route("[controller]")]
     public class ConsultationController : Controller
     {
-
+        
         private DatabaseContext _databaseContext;
         private readonly IToastNotification _toastNotification;
-        private readonly PatientRepository _patientRepository;
+        private readonly IPatientRepository _patientRepository;
         private PatientController _patientController;
+      
 
-        public ConsultationController(DatabaseContext dbContext,IToastNotification notification)
+        public ConsultationController(DatabaseContext dbContext,IToastNotification notification,IPatientRepository patientRepository)
         {
             this._databaseContext = dbContext;
             this._toastNotification = notification;
-            _patientRepository=PatientRepository.Repository(dbContext);
+            _patientRepository = patientRepository;
         }
         // GET
         public IActionResult Index()
@@ -96,9 +101,13 @@ namespace GestionClinique.Controllers
             var List = this._databaseContext.Consultations.ToList();
             return View("Index");
         }
-        public void InitConsultation()
+     
+        
+        /*methode de l'api*/
+        [HttpGet("/searchPatient")]
+        public IEnumerable<Patient> searchPatient([FromQuery(Name = "q")] string queryParams)
         {
-            
+            return this._patientRepository.GetPatients(queryParams);
         }
 
     }

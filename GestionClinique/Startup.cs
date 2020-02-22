@@ -50,9 +50,10 @@ namespace GestionClinique
                 builder.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<PatientRepository>();
+            services.AddScoped<IPatientRepository,PatientRepository>();
             services.AddMvc();
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build";});
+            services.AddControllers().AddNewtonsoftJson();
           
            
 
