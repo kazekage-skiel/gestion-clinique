@@ -1,28 +1,34 @@
 import React from "react";
 import axios from "axios";
+import SickPatientList from "./sub/existingPatientList";
+import AddPatient from "../patients/addPatient";
+import AddPatientForm from "../patients/addPatient";
 
 
 
-class Patient{
-    private id:number;
-    private lname:string;
-    private fname:string;
-    private age:number;
-    private genre:number;
-    private height:number;
-    private weight:number;
-    private birthDate:string;
-    private isHospitalise:boolean;
-    
-    constructor(){
-        this.id=0
-        this.lname=" "
-        this.fname=""
-        this.age=0
-        this.genre=0
-        this.height=0
-        this.weight=0
-        this.birthDate=""
+
+
+class Patient {
+     id:number;
+     lname:string;
+     fname:string;
+     age:number;
+     genre:number;
+     height:number;
+     weight:number;
+     birthDate:string;
+    isHospitalise:boolean;
+
+
+    constructor() {
+        this.id=0;
+        this.lname="";
+        this.fname="";
+        this.age=0;
+        this.genre=0;
+        this.height=0;
+        this.weight=0;
+        this.birthDate="";
         this.isHospitalise=false
         
     }
@@ -32,9 +38,10 @@ class Patient{
 
 
 interface ComponentState {
-    patient:Patient
+    patientList:[],
+    patient:Patient,
     queryParams:string
-    patientFound:boolean
+    patientFound:number
 }
 
 
@@ -46,11 +53,13 @@ export default  class AddConsultationComponent extends React.Component<Props,Com
     
     constructor(props:any){
         super(props)
-        let _patient=new Patient();
+        
         this.state={
-           patient:_patient,
+            patient:new Patient(),
+            
             queryParams:"",
-            patientFound:false
+            patientFound:0,
+            patientList:[]
         }
     }
     
@@ -63,33 +72,78 @@ export default  class AddConsultationComponent extends React.Component<Props,Com
         this.setState({
             queryParams:query
         })
+        
        
     }
     
-    handleSearch=(event:any)=>{
-        axios
-            .get('/searchPatient?q='+this.state.queryParams)
-            .then(success=>{
-                if (success.data.code!=null){
-                    this.setState({
-                        patientFound:true
-                    })
-                }else{
-                    this.setState({
-                        patientFound:false
-                    })
-                }
-            })
-            .catch(failure=>{
-                
-            })
+    
+     async fetchPatient(){
+        let response=  await axios.get('/searchPatient?q='+this.state.queryParams)
+         return response.data
        
-     event.preventDefault()
+      
+    }
+     handleSearch=(event:any)=>{
+      
+       this.fetchPatient().then(success=>{
+           if (success.length>0){
+               this.setState({
+                   patientFound:1,
+                   patientList:success
+               }) 
+           }else{
+               this.setState({
+                   patientFound:-1,
+               })
+           }
+          
+       })
+           .catch(failure=>{
+               this.setState({
+                   patientFound:0
+               })
+           })
+         
+         
+        event.preventDefault()
     }
     
     render(){
+        
+        const renderList=()=>{
+            if (this.state.patientFound ==1){
+
+                return (
+                    <>
+                        <div className="alert alert-success text-center" role="alert">
+                            <strong>
+                                Des utilisateurs correspondant au profil ont été trouvé
+                            </strong>
+                        </div>
+                        <SickPatientList patient={this.state.patientList}/>
+                        
+                    </>
+                  
+                )  
+               
+            }else if (this.state.patientFound==-1){
+               return (
+                   <>
+                       <div className="alert alert-danger" role="alert">
+                           <strong>
+                               Aucun patient n'a été pré-enregistré pour une consultation avec ce nom
+                               Le formulaire d'ajout de patient va s'afficher de suite
+                           </strong>
+                       </div>
+                       <AddPatientForm/>
+                   </>
+               )
+              
+            }
+        }
         return(
              <>
+                 
                  <div className="block-header">
                      <div className="row">
                          <div className="col-lg-7 col-md-6">
@@ -139,24 +193,20 @@ export default  class AddConsultationComponent extends React.Component<Props,Com
                                                  </div>
                                              </div>
                                          </div>
-                                         <button type="submit"
-                                                 className="btn btn-raised btn-primary btn-round waves-effect">Rechercher
+                                         <button 
+                                             type="submit" className="btn btn-raised btn-primary btn-round waves-effect">Rechercher
                                          </button>
                                      </form>
                                    
                                  </div>
                              </div>
                              {/*research result*/}
-                             
+                            {renderList()}
                            
-                             <div className="card">
-                                 <div className="body">
-                                     <div className="header">Resultats de la recherche</div>
-                                 </div>
-                             </div>
+                             
                          </div>
                      </div>
-                 </div>
+                 </div> 
              </>
         )
     }
