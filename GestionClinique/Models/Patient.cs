@@ -21,6 +21,8 @@ namespace GestionClinique.Models
         public string pp_url { get; set; }
         public int hospitalise { get; set; }
         
+        public int state { get; set; }
+        
         [NotMapped]
         public IFormFile ppFile { get; set; }
 

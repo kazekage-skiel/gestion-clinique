@@ -1,13 +1,15 @@
 import React, {SyntheticEvent} from "react";
 import logo from './../../public/assets/images/logo.svg'
 import axios from "axios";
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import DashBoardIndex from "./index";
+import {BrowserRouter as Router, Switch, Route, Link,Redirect,useHistory,useLocation} from "react-router-dom";
 
 interface State {
     zone_id:number
     username:string
     password:string
     workingAreas:Array<any>
+    isLogged:boolean
 }
 
 export default class LoginComponent extends React.Component<any, State> {
@@ -20,8 +22,8 @@ export default class LoginComponent extends React.Component<any, State> {
         zone_id:0,
         username:'',
         password:'',
-        workingAreas:[]
-        
+        workingAreas:[],
+        isLogged:false
     }
     
    
@@ -54,17 +56,23 @@ export default class LoginComponent extends React.Component<any, State> {
     }
     
      handleSubmit=(event:any)=>{
-        
+        let history=useHistory()
         axios.post('/Auth/login',{
             username:this.state.username,
             password:this.state.password,
             Area_Id:this.state.zone_id
         }).then(response=>{
-            if (response.data!=null){
-                this.props.history.push('/login');
+            if (response.data != null){
+                alert("ok")
+                localStorage.setItem("isLogged","yes")
+                this.setState({
+                    isLogged:true
+                })
             }else{
-                
+                alert("emty user ")
             }
+         
+            
         })
             .catch(failure=>{
                 
@@ -72,17 +80,18 @@ export default class LoginComponent extends React.Component<any, State> {
          event.preventDefault()
     }
     
-    
-   
-    
-   
-    
     componentDidMount(): void {
         this.fetchWorkingArea();
     }
     
     /*partie affichage des donnée*/
     render() {
+        const isLogged = this.state.isLogged
+        if (isLogged){
+            return <Redirect to={{
+                pathname:'/index',
+            }}/>
+        }
         return (
             <div>
                 <div className="authentication">
@@ -137,7 +146,7 @@ export default class LoginComponent extends React.Component<any, State> {
                                 </form>
                                 <div className="copyright text-center">
                                     ©
-                                    <script>document.write(new Date().getFullYear())</script>2019,
+                                    <script>document.write(new Date().getFullYear())</script>
                                     <span>
                             <a href="templatespoint.net">Templates Point</a>
                     </span>

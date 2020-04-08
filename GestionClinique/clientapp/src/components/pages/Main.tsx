@@ -6,7 +6,7 @@ import DashBoardIndex from "./index";
 import ConsultationsIndex from "./consultations";
 import AddConsultationComponent from "./consultations/add";
 import EnqueueConsultationList from "./consultations/Enqueue";
-import {BrowserRouter ,Switch, Route, Link,Router} from "react-router-dom";
+import {BrowserRouter ,Switch, Route, Link,Router,useHistory,useLocation} from "react-router-dom";
 
 
 interface Props {
@@ -35,19 +35,15 @@ export default class Main extends React.Component<Props,State>{
            <>
                <Sidebar/>
                <PlaceHolder>
-                   <BrowserRouter>
-                       <Switch>
+                   <Switch>
                            <Route exact path="/" component={DashBoardIndex} />
                            <Route  path="/patients">
-                               <Route exact path='/index' component={PatientIndex}/>
+                               <Route  path='/index' exact component={PatientIndex}/>
                            </Route>
                            <Route  path="/consultations" component={ConsultationsIndex} />
                            <Route  path="/addConsultation" component={AddConsultationComponent} />
                            <Route  path="/enqueueConsultation" component={EnqueueConsultationList} />
-                         
-                           
-                       </Switch>
-                   </BrowserRouter>
+                   </Switch>
                </PlaceHolder>
             </>   
         )
