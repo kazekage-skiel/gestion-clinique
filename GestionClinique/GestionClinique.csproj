@@ -1236,6 +1236,21 @@
     <_ContentIncludedByDefault Remove="client\public\manifest.json" />
     <_ContentIncludedByDefault Remove="client\package.json" />
     <_ContentIncludedByDefault Remove="client\tsconfig.json" />
+    <_ContentIncludedByDefault Remove="Views\Admin\Home.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Consultation\create_consultation.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Consultation\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Consultation\single.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Login.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Patient\index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\Error.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\_sideBar.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\_topBar.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\_ViewImports.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\_ViewStart.cshtml" />
   </ItemGroup>
 
 

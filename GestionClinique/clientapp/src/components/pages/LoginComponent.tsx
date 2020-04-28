@@ -87,10 +87,8 @@ export default class LoginComponent extends React.Component<any, State> {
     /*partie affichage des donnée*/
     render() {
         const isLogged = this.state.isLogged
-        if (isLogged){
-            return <Redirect to={{
-                pathname:'/index',
-            }}/>
+        if (isLogged) {
+            return <Redirect to="/"/>
         }
         return (
             <div>

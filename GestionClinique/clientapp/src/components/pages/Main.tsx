@@ -6,7 +6,8 @@ import DashBoardIndex from "./index";
 import ConsultationsIndex from "./consultations";
 import AddConsultationComponent from "./consultations/add";
 import EnqueueConsultationList from "./consultations/Enqueue";
-import {BrowserRouter ,Switch, Route, Link,Router,useHistory,useLocation} from "react-router-dom";
+import {BrowserRouter ,Switch, Route, Link,Router,useHistory,useLocation,Redirect} from "react-router-dom";
+import LoginComponent from "./LoginComponent";
 
 
 interface Props {
@@ -31,21 +32,57 @@ export default class Main extends React.Component<Props,State>{
     }
     
     render(){
-        return(
-           <>
-               <Sidebar/>
-               <PlaceHolder>
-                   <Switch>
-                           <Route exact path="/" component={DashBoardIndex} />
-                           <Route  path="/patients">
-                               <Route  path='/index' exact component={PatientIndex}/>
-                           </Route>
-                           <Route  path="/consultations" component={ConsultationsIndex} />
-                           <Route  path="/addConsultation" component={AddConsultationComponent} />
-                           <Route  path="/enqueueConsultation" component={EnqueueConsultationList} />
-                   </Switch>
-               </PlaceHolder>
-            </>   
-        )
+        console.log(localStorage.getItem("isLogged"))
+        if (localStorage.getItem("isLogged") == "yes"){
+            return(
+                <>
+                    <Sidebar/>
+                   
+                        <BrowserRouter>
+                            <Switch>
+                                <PlaceHolder>
+
+                                <Route  path="/patients">
+                                    <Route  path='/index' exact component={PatientIndex}/>
+                                </Route>
+                                <Route  path="/consultations" component={ConsultationsIndex} />
+                                <Route  path="/addConsultation" component={AddConsultationComponent} />
+                                <Route  path="/enqueueConsultation" component={EnqueueConsultationList} />
+                               
+                                <Route exact path="/" component={DashBoardIndex} />
+                                </PlaceHolder>
+                                <Route  path="/login" component={LoginComponent} />
+                            </Switch>
+                        </BrowserRouter>
+
+                   
+                </>
+            )
+        }else{
+            return(
+                <>
+                    <Sidebar/>
+                
+                        <BrowserRouter>
+                            <Switch>
+                                <PlaceHolder>
+                                <Route  path="/patients">
+                                    <Route  path='/index' exact component={PatientIndex}/>
+                                </Route>
+                                <Route  path="/consultations" component={ConsultationsIndex} />
+                                <Route  path="/addConsultation" component={AddConsultationComponent} />
+                                <Route  path="/enqueueConsultation" component={EnqueueConsultationList} />
+                                    <Route exact path="/login" component={LoginComponent} />
+                                <Route exact path="/" component={DashBoardIndex} />
+                                </PlaceHolder>
+                              
+                            </Switch>
+                        </BrowserRouter>
+
+                    
+                </>
+            )
+        }
+       
     }
 }

@@ -7,11 +7,9 @@ import Main from './components/pages/Main'
 import Login from './components/pages/LoginComponent'
 import * as serviceWorker from './serviceWorker';
 
-if (localStorage.getItem("isLogged")== "yes"){
-    ReactDOM.render(<BrowserRouter><Main/></BrowserRouter>, document.getElementById('root')); 
-}else{
-    ReactDOM.render(<BrowserRouter><Login/></BrowserRouter>, document.getElementById('root'));
-}
+
+ReactDOM.render(<Main/>, document.getElementById('root')); 
+
 
 
 // If you want your app to work offline and load faster, you can change
